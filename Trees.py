@@ -58,6 +58,56 @@ def levelorder(root):
             levelorder(root.left)
         if top.right!=None:
             levelorder(root.right)
+            
+# def non_ins(root,data):
+#     newNode=Node(data)
+#     x=root
+#     y=None
+#     while x!=None:
+#         y=x
+#         if data<x.data:
+#             x=x.left
+#         else:
+#             x=x.right
+#     if y==None:
+#         y = newNode
+#     elif data < y.data:
+#         y.left = newNode
+#     else:
+#         y.right = newNode
+#     return y
+
+
+# def min(root):
+#     min=root.right
+#     while root.right!=None:
+#         min =root.left
+#     return min
+
+
+
+# def deleteNode(root,data):
+#     if root is None:
+#         return root
+#     if root.data<data:
+#         root.right=deleteNode(root.right,data)
+#     if root.data>data:
+#         root.left=deleteNode(root.left,data)
+#     else:
+#         if root.left is None:
+#             temp=root.right
+#             root=None
+#             return temp
+#         if root.right is None:
+#             temp=root.left
+#             root=None
+#             return temp
+#         if root.left is None and root.right is None:
+#             root=None
+#         if root.left!=None and root.right!=None:
+#             mini=min(root)
+#             root=None
+#             return mini   
 
 
 root = None
