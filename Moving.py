@@ -32,12 +32,6 @@ class SLL:
         self.head = temp.next
         temp.next = None
 
-    def movefl(self):
-        temp = self.head
-        while temp:
-            self.head = temp.next.next
-            temp.next = temp
-            temp.next = None
 
 
 l = SLL()
@@ -45,5 +39,5 @@ n = int(input('n no--->'))
 for i in range(n):
     data = int(input('data-->'))
     l.append(data)
-l.movefl()
+l.movelf()
 l.print()
