@@ -78,32 +78,32 @@ def levelorder(root):
 #     return y
 
 
-# def min(root):
-#     min=root.right
-#     while root.right!=None:
-#         min =root.left
-#     return min
+def min(root):
+    min=root.right
+    while root.right!=None:
+        min =root.left
+    return min
 
 
 
-# def deleteNode(root,data):
-#     if root is None:
-#         return root
-#     if root.data<data:
-#         root.right=deleteNode(root.right,data)
-#     if root.data>data:
-#         root.left=deleteNode(root.left,data)
-#     else:
-#         if root.left is None:
-#             temp=root.right
-#             root=None
-#             return temp
-#         if root.right is None:
-#             temp=root.left
-#             root=None
-#             return temp
-#         if root.left is None and root.right is None:
-#             root=None
+def deleteNode(root,data):
+    if root is None:
+        return root
+    if root.data<data:
+        root.right=deleteNode(root.right,data)
+    if root.data>data:
+        root.left=deleteNode(root.left,data)
+    else:
+        if root.left is None:
+            temp=root.right
+            root=None
+            return temp
+        if root.right is None:
+            temp=root.left
+            root=None
+            return temp
+        if root.left is None and root.right is None:
+            root=None
 #         if root.left!=None and root.right!=None:
 #             mini=min(root)
 #             root=None
