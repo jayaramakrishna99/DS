@@ -120,7 +120,6 @@ def leafall(root,data):
 
 
 
-# root=None
 # l=[int(i) for i in input().split()]
 l=[100,60,50,70,30,55,65,75,120,125]
 root=None
