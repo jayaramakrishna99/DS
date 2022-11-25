@@ -82,7 +82,6 @@ def delete(root,data):
         if root.left==None and root.right==None:
             root=None
             return root
-
         if root.left is None:
             temp=root.right
             root=None
@@ -95,7 +94,6 @@ def delete(root,data):
             temp=min(root.right)
             root.data=temp.data
             root.right=delete(root.right,temp.data)
-
     return root
 
 def min(root):
@@ -114,12 +112,41 @@ def leafall(root,data):
         return leafall(root.left,data)
     return False
 
+def del_leaf_all(l):
+    for i in l:
+        if leafall(root,i)==True:
+            delete(root,i)
+            
+            
+def findsucc(root,succ,key):
+    if root is None:
+        return succ
+    if root.data == key:
+        if root.right:
+            return min(root.right)
+    elif key < root.data:
+        succ = root
+        return findsucc(root.left, succ, key)
+    else:
+        return findsucc(root.right, succ, key)
+    return succ
+
+def height(root):
+    if root is None:
+        return 0
+    return max(height(root.right),height(root.left))+1
 
 
-
-
-
-
+def hneed(root,data,h):
+    temp=height(root)
+    if temp==h and root.data==data:
+        print(root.data)
+    if root.data<data:
+        return hneed(root.right,data,h)
+    if root.data>data:
+        return hneed(root.left,data,h)
+    
+    
 # l=[int(i) for i in input().split()]
 l=[100,60,50,70,30,55,65,75,120,125]
 root=None
@@ -132,14 +159,20 @@ def insert(l,temp):
         root=non_ins(root,l[0])
         for i in range(1,len(l)):
             non_ins(root,l[i])
-
-
-def del_leaf_all(l):
-    for i in l:
-        if leafall(root,i)==True:
-            delete(root,i)
         
-        
-
 insert(l,False)
 levelorder(root)
+
+
+key=int(input("Enter:"))
+succ=None
+succ=findsucc(root,None,key)
+print(succ.data)
+del(root,succ.data)
+
+h=int(input("height:"))
+for i in l:
+    hneed(root,i,h)
+print(height(root))
+
+
