@@ -147,9 +147,27 @@ def hneed(root,data,h):
         return hneed(root.left,data,h)
     
     
-# l=[int(i) for i in input().split()]
-l=[100,60,50,70,30,55,65,75,120,125]
-root=None
+def parent(root,data,tem1=None):
+    if data == root.data:
+        return pcheck(tem1)
+    if data<root.data:
+        tem1=root.data
+        parent(root.left,data,tem1)
+    elif data>root.data:
+        tem1=root.data
+        parent(root.right,data,tem1)
+
+
+d=[]
+def pcheck(val):
+    d.append(val)
+    if len(d)==2:
+        if d[0]==d[1]:
+            print(True)
+        else:
+            print(False)
+            
+    
 def insert(l,temp):
     global root
     if temp==True:
@@ -159,20 +177,33 @@ def insert(l,temp):
         root=non_ins(root,l[0])
         for i in range(1,len(l)):
             non_ins(root,l[i])
-        
+            
+            
+# l=[int(i) for i in input().split()]
+l=[100,60,50,70,30,55,65,75,120,125]
+root=None
 insert(l,False)
-levelorder(root)
 
 
-key=int(input("Enter:"))
+#-- height input
+
+h=int(input(" Enter the required height:"))
+for i in l:
+    hneed(root,i,h)
+print(height(root))
+
+#-- find succ input
+
+key=int(input("Enter the value:"))
 succ=None
 succ=findsucc(root,None,key)
 print(succ.data)
 del(root,succ.data)
 
-h=int(input("height:"))
-for i in l:
-    hneed(root,i,h)
-print(height(root))
+#--parent input
+
+l1=[int(i) for i in input("Enter Two childs:").split()]
+for i in l1:
+    parent(root,i,tem1=None)
 
 
