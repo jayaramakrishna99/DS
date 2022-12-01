@@ -3,6 +3,7 @@ class Node:
         self.left=None
         self.data=data
         self.right=None
+        
 def ins(root,data):
     if root==None:
         return Node(data)
@@ -167,7 +168,31 @@ def pcheck(val):
         else:
             print(False)
             
-    
+def parent_del(root, data, tem1=None):
+    if data == root.data:
+        return delete(root, tem1)
+    if data < root.data:
+        tem1 = root.data
+        parent(root.left, data, tem1)
+    elif data > root.data:
+        tem1 = root.data
+        parent(root.right, data, tem1)
+
+
+def child_del(root, data):
+    if data == root.data:
+        if root.left:
+            delete(root, root.left.data)
+        if root.right:
+            delete(root, root.right.data)
+        else:
+            print("No childs")
+    if data < root.data:
+        child_del(root.left, data)
+    elif data > root.data:
+        child_del(root.right, data)
+        
+        
 def insert(l,temp):
     global root
     if temp==True:
@@ -200,7 +225,7 @@ succ=findsucc(root,None,key)
 print(succ.data)
 del(root,succ.data)
 
-#--parent input
+#--finding parent and two child case input
 
 l1=[int(i) for i in input("Enter Two childs:").split()]
 for i in l1:
