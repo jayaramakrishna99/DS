@@ -1,62 +1,67 @@
 class Node:
-    def _init_(self,data):
-        self.data=data
+    def __init__(self,data):
         self.left=None
+        self.data=data
         self.right=None
-        self.height=1
-def getHeight(root):
-    if root==None:
+
+def levelorder(root):
+    q=[]
+    q.append(root)
+    while len(q)!=0:
+        top=q.pop(0)
+        print(top.data)
+        if top.left!=None:
+            q.append(top.left)
+        if top.right!=None:
+            q.append(top.right)
+
+def height(root):
+    if root is None:
         return 0
-    return root.height
-def getBalanceFactor(root):
-    if root==None:
-        return 0
-    return getHeight(root.left)-getHeight(root.right)
-def rightRotate(root):
-    x=root.left
-    t2=x.right
-    x.right=root
-    root.left=t2
-    root.height=1+max(getHeight(root.left),getHeight(root.right))
-    x.height=1+max(getHeight(x.left),getHeight(x.right))
-    return x
-def leftRotate(root):
-    y=root.right
-    t2=y.left
-    y.right=root
-    root.right=t2
-    root.height=1+max(getHeight(root.left),getHeight(root.right))
-    y.height=1+max(getHeight(y.left),getHeight(y.right))
-    return y
-def insert(root,data):
-    if root==None:
+    return max(height(root.left),height(root.right))+1
+
+def balfac(root):
+    return height(root.left)-height(root.right)
+
+def rightrotate(root):
+    temp=root.left
+    t=temp.right
+    temp.right=root
+    root.left=t
+    return temp
+
+def leftrotate(root):
+    temp=root.right
+    t=temp.left
+    temp.left=root
+    root.right=t
+    return temp
+
+def avl_ins(root,data):
+    if root is None:
         return Node(data)
-    if data<root.data:
-        root.left=insert(root.left,data)
-    else:
-        root.right=insert(root.right,data)
-    root.height=1+max(getHeight(root.left),getHeight(root.right))
-    bf=getBalanceFactor(root)
-    if bf>1:  
-        if data<root.left.data:
-            return rightRotate(root)
+    if root.data<data:
+        root.right = avl_ins(root.right,data)
+    elif root.data>data:
+        root.left = avl_ins(root.left,data)
+    b=balfac(root)
+    if b>1:
+        if root.left.data>data:
+            return rightrotate(root)
         else:
-            root.left=rightRotate(root.right)
-            return leftRotate(root)
-    if bf<-1: 
-        if data>root.right.data:
-            return rightRotate(root)
+            root.left=leftrotate(root)
+            return rightrotate(root)
+    if b<-1:
+        if root.right.data<data:
+            return leftrotate(root)
         else:
-            root.right=leftRotate(root.right)
-            return rightRotate(root)
+            root.left=rightrotate(root)
+            return leftrotate(root)
     return root
-def inorder(root):
-     if root!=None:
-        inorder(root.left)
-        print(root.data)
-        inorder(root.right)
+
 root=None
-a=[33, 13, 52, 9, 21, 61, 8, 11]
-for i in a:
-    root=insert(root,i)
-inorder(root)
+# l=[int(i) for i in input("Enter the list:").split()]
+l=[100,60,50,70,30,55,65,75,120,125]
+for i in l:
+    root=avl_ins(root,i)
+levelorder(root)
