@@ -49,13 +49,13 @@ def avl_ins(root,data):
         if root.left.data>data:
             return rightrotate(root)
         else:
-            root.left=leftrotate(root)
+            root.left=leftrotate(root.left)
             return rightrotate(root)
     if b<-1:
         if root.right.data<data:
             return leftrotate(root)
         else:
-            root.left=rightrotate(root)
+            root.right=rightrotate(root.right)
             return leftrotate(root)
     return root
 
