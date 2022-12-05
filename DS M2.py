@@ -13,12 +13,26 @@ def bst_ins(root,data):
         root.left=bst_ins(root.left,data)
     return root
 
-def inorder(root):
+def check_bal(root):
     if root is None:
         return
-    inorder(root.left)
-    print(root.data)
-    inorder(root.right)
+    check_bal(root.left)
+    if -1<=balfac(root)<=1:
+        return True
+    check_bal(root.right)
+    return False
+
+def levelorder(root):
+    q=[]
+    q.append(root)
+    while len(q)!=0:
+        top=q.pop(0)
+        print(top.data)
+        if top.left!=None:
+            q.append(top.left)
+        if top.right!=None:
+            q.append(top.right)
+
 
 def maxi(root):
     while root.right!=None:
@@ -38,24 +52,34 @@ def height(root):
 def balfac(root):
     return height(root.left)-height(root.right)
 
+def rightrotate(root):
+    temp=root.left
+    t=temp.right
+    temp.right=root
+    root.left=t
+    return temp
+
 def leftrotate(root):
-    
+    temp=root.right
+    t=temp.left
+    temp.left=root
+    root.right=t
+    return temp
 
 def avl_ins(root,data):
     if root is None:
-        return
+        return Node(data)
     if root.data<data:
         root.right = avl_ins(root.right,data)
     elif root.data>data:
         root.left = avl_ins(root.left,data)
-    h=height(root)
     b=balfac(root)
     if b>1:
         if root.left.data>data:
             return rightrotate(root)
         else:
             root.left=leftrotate(root)
-            return rightright(root)
+            return rightrotate(root)
     if b<-1:
         if root.right.data<data:
             return leftrotate(root)
@@ -69,7 +93,8 @@ root=None
 # l=[int(i) for i in input("Enter the list:").split()]
 l=[100,60,50,70,30,55,65,75,120,125]
 for i in l:
-    root=bst_ins(root,i)
-
-print(maxi(root))
-print(mini(root))
+    root=avl_ins(root,i)
+levelorder(root)
+# print(maxi(root))
+# print(mini(root))
+# print(check_bal(root))
