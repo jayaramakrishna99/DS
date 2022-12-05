@@ -39,11 +39,6 @@ def maxi(root):
         root=root.right
     return root.data
 
-def mini(root):
-    while root.left!=None:
-        root=root.left
-    return root.data
-
 def height(root):
     if root is None:
         return 0
@@ -78,16 +73,15 @@ def avl_ins(root,data):
         if root.left.data>data:
             return rightrotate(root)
         else:
-            root.left=leftrotate(root)
+            root.left=leftrotate(root.left)
             return rightrotate(root)
     if b<-1:
         if root.right.data<data:
             return leftrotate(root)
         else:
-            root.left=rightrotate(root)
+            root.right=rightrotate(root.right)
             return leftrotate(root)
     return root
-
 
 root=None
 # l=[int(i) for i in input("Enter the list:").split()]
