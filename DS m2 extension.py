@@ -62,30 +62,31 @@ def avl_ins(root,data):
             return leftrotate(root)
     return root
 
-
+# Searching comparisons in BST and AVL
 def search(root,data,c=0):
     c+=1
     if root is None:
         return
     if root.data==data:
         print("Found in",c)
-
     if root.data<data:
         search(root.right,data,c)
     elif root.data>data:
         search(root.left,data,c)
 
-
+# Insertion and Searching in BST
 root=None
-l=[100,70,50,40,60,75,80]
+# l=[100,70,50,40,60,75,80]
+l=[int(i) for i in input("Enter the List:").split()]
+n=int(input("Enter the data You want search:"))
 for i in l:
     root=bst_ins(root,i)
+print("the min value:",mini(root))
+search(root,n)
 
-search(root,40)
-
+# Insertion and Searching in AVL
 root1=None
 for i in l:
     root1=avl_ins(root1,i)
-
-search(root1,40)
+search(root1,n)
 
