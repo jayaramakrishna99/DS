@@ -148,25 +148,21 @@ def hneed(root,data,h):
         return hneed(root.left,data,h)
     
     
+t1=[]
 def parent(root,data,tem1=None):
     if data == root.data:
-        return pcheck(tem1)
+        t1.append(tem1)
+        if len(t1)==2 and t1[0]==t1[1]:
+            print(tem1)
+        elif len(t1)==2:
+            print("No node")
     if data<root.data:
         tem1=root.data
         parent(root.left,data,tem1)
     elif data>root.data:
         tem1=root.data
         parent(root.right,data,tem1)
-
-
-d=[]
-def pcheck(val):
-    d.append(val)
-    if len(d)==2:
-        if d[0]==d[1]:
-            print(True)
-        else:
-            print(False)
+        
             
 def parent_del(root, data, tem1=None):
     if data == root.data:
