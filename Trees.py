@@ -55,6 +55,20 @@ def levelorder(root):
         if top.right!=None:
             q.append(top.right)
 
+def rangesumBST(root,low,high):
+    q=[]
+    sum=0
+    q.append(root)
+    while len(q)!=0:
+        top=q.pop(0)
+        if low<=top.data<=high:
+            sum+=top.data
+        if top.left!=None:
+            q.append(top.left)
+        if top.right!=None:
+            q.append(top.right)
+    return sum
+
 def non_ins(root,data):
     x=root
     y=None
@@ -205,6 +219,10 @@ l=[100,60,50,70,30,55,65,75,120,125]
 root=None
 insert(l,False)
 
+#-- rangesumBST low and high
+low=30
+high=60
+print(rangesumBST(root,low,high))
 
 #-- height input
 
